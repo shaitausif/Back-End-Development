@@ -16,7 +16,7 @@ const todoSchema = new mongoose.Schema(
       // It'll compulsory to write the ref property if we're refering any schema  
       ref : "User"
     },
-    // here we're defining that the subtodos will be an array of objects where each object will of SubTodo type
+    // here we're defining that the subtodos will be an array of objects where each object will be of SubTodo type
     subTodos : [
       {
         type : mongoose.Schema.Types.ObjectId,
