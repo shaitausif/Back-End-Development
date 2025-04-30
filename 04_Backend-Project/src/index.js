@@ -4,19 +4,30 @@
 
 import dotenv from 'dotenv'
 import connectDB from './db/index.js'
+import { app } from './app.js'
 
 
 dotenv.config({
     path : './env'
 })
 
+// MONGODB returns a promise when we connect to it
 connectDB()
+.then(() => {
+    
+    app.listen(process.env.PORT || 8000, ()=> {
+        console.log(`Server is running at http://localhost:${process.env.PORT}`)                           
+    })
+})
+.catch(() => {
+    console.log('Mongodb Connection failed!!')
+})
 
 
 
 // This is the first approach where we're implementing the code of database connection in our index file but for more modular and readable code we should implement it in the db folder seperately
 /*
-//  we've two option first we can create a function and then call it or we can create an IIFE which we don't need to call it'll invoke immediately as the server starts
+//  we've two options first we can create a function and then call it or we can create an IIFE which we don't need to call it'll invoke immediately as the server starts
 // It's a good approach to use semicolon before IIFE's so that if the previous line of code hasn't have a semicolon at the end it can create problems
 import express from 'express'
 const app = express()
